@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 col-sm-12">
+        <h2>
+          Users
+        </h2>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/home/dashboard']"><i class="icon-home"></i></a></li>
+          <li class="breadcrumb-item">Dashboard</li>
+          <li class="breadcrumb-item active">Users</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row clearfix">
+    <div class="col-lg-12 col-md-12">
+      <div class="card planned_task">
+        <div class="header d-flex justify-content-between">
+          <h4>Users</h4>
+          <a [routerLink]="['/home/users/add']" routerLinkActive="active" class="btn btn-primary">
+            <i class="fa fa-plus-circle"></i>&nbsp; Add User
+          </a>
+
+        </div>
+        <div class="body pt-0">
+          <div class="row clearfix">
+            <div class="col-lg-12">
+              <div class="card-description">
+                <form>
+                  <div class="d-flex justify-content-center w-25 mb-3">
+                    <input class="form-control ml-2" type="text" name="filterText" placeholder="Filter"
+                      [(ngModel)]="filterText" />
+                  </div>
+                </form>
+              </div>
+              <div class="body table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col" sortable="username" (sort)="onSort($event)">Username</th>
+                      <th scope="col" sortable="first_name" (sort)="onSort($event)">First Name</th>
+                      <th scope="col" sortable="last_name" (sort)="onSort($event)">Last Name</th>
+                      <th scope="col" sortable="email" (sort)="onSort($event)">Email</th>
+                      <th scope="col" sortable="phone" (sort)="onSort($event)">Phone</th>
+                      <th scope="col" sortable="dob" (sort)="onSort($event)">Date of Birth</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of users$ | async">
+
+                      <td>
+                        <ngb-highlight [result]="user.username" [term]=""></ngb-highlight>
+                      </td>
+                      <td>
+                        <ngb-highlight [result]="user.first_name" [term]=""></ngb-highlight>
+                      </td>
+                      <td>
+                        <ngb-highlight [result]="user.last_name" [term]=""></ngb-highlight>
+                      </td>
+                      <td>
+                        <ngb-highlight [result]="user.email" [term]=""></ngb-highlight>
+                      </td>
+                      <td>
+                        <ngb-highlight [result]="user.phone" [term]=""></ngb-highlight>
+                      </td>
+                      <td>
+                        <ngb-highlight [result]="user.dob | date: 'dd-MM-yyyy'" [term]=""></ngb-highlight>
+                      </td>
+                      <th scope="row">
+                        <div ngbDropdown class="d-inline-block">
+                          <button class="btn btn-primary" type="button" id="dropdownMenuButton2" ngbDropdownToggle>
+                            Manage
+                          </button>
+                          <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
+                            <a class="dropdown-item pt-3 pb-3" href="#" [routerLink]="['/home/users/', user.id]">
+                              <i class="fa fa-bullseye"></i>&nbsp;View User
+                            </a>
+                            <a class="dropdown-item pt-3 pb-3" [routerLink]="['add/', user.id]">
+                              <i class="fa fa-edit"></i>&nbsp;Edit User
+                            </a>
+                            <a class="dropdown-item pt-3 pb-3" href="#" (click)="deleteUser()">
+                              <i class="fa fa-times-circle-o"></i> &nbsp; Deactivate User</a>
+                          </div>
+                        </div>
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="d-flex justify-content-between p-2">
+                  <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="service.page" [pageSize]="service.pageSize">
+                          </ngb-pagination> -->
+
+                  <!-- <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+                            <option [ngValue]="2">2 items per page</option>
+                            <option [ngValue]="4">4 items per page</option>
+                            <option [ngValue]="6">6 items per page</option>
+                       </select>
+                  -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

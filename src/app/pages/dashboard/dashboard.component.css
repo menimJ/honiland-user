@@ -1,0 +1,52 @@
+.digits {
+    font-weight: 600 !important;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: #32325d;
+}
+
+.icon-shape {
+    padding: 12px;
+    text-align: center;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 2rem 0 rgba(136,152,170,.15)!important;
+}
+
+.icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.bg-gradient-red {
+    background: linear-gradient(87deg,#f5365c,#f56036)!important;
+}
+
+.bg-gradient-green {
+    background: linear-gradient(87deg,#2dce89,#2dcecc)!important;
+}
+
+.bg-gradient-orange {
+    background: linear-gradient(87deg,#fb6340,#fbb140)!important;
+}
+
+.bg-gradient-info {
+    background: linear-gradient(87deg,#11cdef,#1171ef)!important;
+}
+
+.bg-gradient-more {
+    background: linear-gradient(87deg,#ff0084,#33001b)!important;
+}
+
+.no-bg-bx {
+    background: none !important;
+    box-shadow: none !important;
+}

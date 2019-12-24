@@ -1,0 +1,94 @@
+<div class="header d-flex justify-content-between">
+  <h4>Buy Transactions Records</h4>
+</div>
+<div class="body pt-0">
+  <div class="row clearfix">
+    <div class="col-lg-12">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Reference Id</th>
+              <th scope="col">Currency</th>
+              <th scope="col">Amount Needed</th>
+              <th scope="col">Amount Paid</th>
+              <th scope="col">Recipient Address</th>
+              <th scope="col">Satoshi Value</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date</th>
+              <!-- <th scope="col" sortable="username" (sort)="onSort($event)">Username</th>-->
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of buyTransactions$ | async">
+              <td>
+                <ngb-highlight class="linker" [result]="transaction.reference_id" [term]=""></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight [result]="transaction.currency_name" [term]=""></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight [result]="transaction.amount_needed" [term]=""></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight [result]="transaction.amount_paid" [term]=""></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight [result]="transaction.receiving_address" [term]=""></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight [result]="transaction.satoshi_value" [term]=""></ngb-highlight>
+              </td>
+              <td>
+                <span class="badge" [ngClass]="
+                {
+                  'badge-warning': transaction.status === 'pending',
+                  'badge-info': transaction.status === 'processing',
+                  'badge-success': transaction.status === 'successful'
+                }
+                ">
+                <ngb-highlight [result]="transaction.status" [term]=""></ngb-highlight>
+              </span>
+              </td>
+              <td>
+                <ngb-highlight [result]="transaction.created | date: 'short'" [term]=""></ngb-highlight>
+              </td>
+
+
+              <!--<th scope="row">
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-primary" type="button" id="dropdownMenuButton2" ngbDropdownToggle>
+                    Manage
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
+                    <a class="dropdown-item pt-3 pb-3" href="#" [routerLink]="['/home/users/', user.id]">
+                      <i class="fa fa-bullseye"></i>&nbsp;View User
+                    </a>
+                    <a class="dropdown-item pt-3 pb-3" [routerLink]="['add/', user.id]">
+                      <i class="fa fa-edit"></i>&nbsp;Edit User
+                    </a>
+                    <a class="dropdown-item pt-3 pb-3" href="#" (click)="deleteUser()">
+                      <i class="fa fa-times-circle-o"></i> &nbsp; Deactivate User</a>
+                  </div>
+                </div>
+              </th> -->
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between p-2">
+          <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="service.page" [pageSize]="service.pageSize">
+                      </ngb-pagination> -->
+
+          <!-- <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+                        <option [ngValue]="2">2 items per page</option>
+                        <option [ngValue]="4">4 items per page</option>
+                        <option [ngValue]="6">6 items per page</option>
+                      </select> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

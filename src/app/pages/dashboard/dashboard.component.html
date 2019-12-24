@@ -1,0 +1,152 @@
+<div class="container-fluid">
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 col-sm-12">
+          <div class="col-lg-6 col-5 text-right">
+              <a href="#" class="btn btn-sm btn-neutral">Load Wallet</a>
+            </div>
+        <h2>
+          Dashboard
+        </h2>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/admin']"><i class="icon-home"></i></a></li>
+          <li class="breadcrumb-item">Dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row clearfix">
+    <div class="col-lg-12 col-md-12">
+      <div class="card planned_task no-bg-bx">
+        <div class="body">
+          <div class="row">
+            <div class="col-lg-6 col-xl-3 col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-capitalize text-muted mb-0">Net Returns</h5>
+                      <span class="digits">{{ (statistics$ | async).total_orders || "Loading..."}}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape text-white rounded-circle shadow bg-gradient-red">
+                        <fa-icon [icon]="faShippingFast"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-3 col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-capitalize text-muted mb-0">Total Invested</h5>
+                      <span class="digits">{{ (statistics$ | async).total_sales + 0 || "Loading..."}}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape text-white rounded-circle shadow bg-gradient-green">
+                        <fa-icon [icon]="faTruckLoading"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-3 col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-capitalize text-muted mb-0">Total Withdrawal</h5>
+                      <span class="digits">{{(statistics$ | async).orders_processing || "Loading..."}}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape text-white rounded-circle shadow bg-gradient-orange">
+                        <fa-icon [icon]="faDolly"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-3 col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-capitalize text-muted mb-0">Performance</h5>
+                      <span class="digits">{{ (statistics$ | async).pending_orders || "Loading..."}}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape text-white rounded-circle shadow bg-gradient-info">
+                        <fa-icon [icon]="faHandHoldingUsd"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <p>Recent Transaction</p>
+                </div>
+                <div class="col">            
+                    <div class="body table-responsive">
+                        <table class="table table-hover table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col" sortable="username" >Username</th>
+                              <th scope="col" sortable="first_name" >First Name</th>
+                              <th scope="col" sortable="last_name" >Last Name</th>
+                              <th scope="col" sortable="email" >Email</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let user of users$ | async">
+        
+                              <td>
+                                <ngb-highlight [result]="user.username" [term]=""></ngb-highlight>
+                              </td>
+                              <td>
+                                <ngb-highlight [result]="user.first_name" [term]=""></ngb-highlight>
+                              </td>
+                              <td>
+                                <ngb-highlight [result]="user.last_name" [term]=""></ngb-highlight>
+                              </td>
+                              <td>
+                                <ngb-highlight [result]="user.email" [term]=""></ngb-highlight>
+                              </td>
+                              <th scope="row">
+                                <div ngbDropdown class="d-inline-block">
+                                  <button class="btn btn-primary" type="button" id="dropdownMenuButton2" ngbDropdownToggle>
+                                    Manage
+                                  </button>
+                                  <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
+                                    <a class="dropdown-item pt-3 pb-3" href="#" [routerLink]="['/home/users/', user.id]">
+                                      <i class="fa fa-bullseye"></i>&nbsp;View User
+                                    </a>
+                                  </div>
+                                </div>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+  
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

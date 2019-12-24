@@ -1,0 +1,185 @@
+<div class="container-fluid">
+
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 col-sm-12">
+        <h2>
+          User
+        </h2>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/admin']"><i class="icon-home"></i></a></li>
+          <li class="breadcrumb-item">Dashboard</li>
+          <li class="breadcrumb-item active">User</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row clearfix">
+    <div class="col-lg-12 col-md-12">
+      <div class="card planned_task">
+        <div class="header  d-flex justify-content-between">
+          <h4 *ngIf="formaction$|async">
+            Add User
+          </h4>
+          <h4 *ngIf="!(formaction$|async)">
+            Add User
+          </h4>
+          <a (click)="goBack()" class="btn btn-primary text-light">
+            <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
+          </a>
+        </div>
+        <div class="body pt-0">
+          <form class="form-sample" [formGroup]="userForm" (ngSubmit)="addUser()">
+            <div class="pb-3">
+              <div class="row">
+                <div class="col-xl-8 offset-xl-2">
+                  <ngb-alert [type]="'danger'" *ngIf="hasFormErrors" (close)="closeAlert($event)">
+                    Make sure all fields are valid and try submitting again.
+                  </ngb-alert>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">First Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" formControlName="first_name" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" formControlName="last_name" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" formControlName="email" />
+                      <ng-container *ngIf="userForm.get('email').touched">
+                        <small *ngIf="userForm.get('email').hasError('email')"
+                          class="form-control-feedback text-danger">
+                          Email is <strong>Invalid</strong>
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" formControlName="username" />
+                      <ng-container *ngIf="userForm.get('username').touched">
+                        <small *ngIf="userForm.get('username').hasError('required')"
+                          class="form-control-feedback text-danger">
+                          Username is <strong>required</strong>
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Phone</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" formControlName="phone" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Date of Birth</label>
+                    <div class="col-sm-9">
+                      <div class="m-input-icon m-input-icon--right">
+                        <input type="text" class="form-control m-input" formControlName="dob" ngbDatepicker
+                          #startDuration1="ngbDatepicker" (click)="startDuration1.toggle()">
+                        <span class="m-input-icon__icon m-input-icon__icon--right">
+                          <span>
+                            <i class="la la-calendar-check-o"></i>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Gender</label>
+                    <div class="col-sm-9">
+                      <select class="form-control" formControlName="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">Others</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Referral Code</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" formControlName="referral_code" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Settings</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col">
+                          <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch2"
+                              formControlName="is_staff">
+                            <label class="custom-control-label" for="customSwitch2">Is Staff</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                              formControlName="is_superuser">
+                            <label class="custom-control-label" for="customSwitch1">Is Superuser</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch3"
+                              formControlName="is_active">
+                            <label class="custom-control-label" for="customSwitch3">Is Active</label>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mr-2" [disabled]="isLoading | async">
+              <span *ngIf="isLoading | async" class="mr-4">
+                <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+              </span>Submit</button>
+            <button class="btn btn-light" type="button" (click)="goBack()">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

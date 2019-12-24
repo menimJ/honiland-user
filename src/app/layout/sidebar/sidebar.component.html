@@ -1,0 +1,76 @@
+<div id="left-sidebar" class="sidebar" *ngIf="sidebarVisible" style="overflow-y:scroll;">
+  <div class="sidebar-scroll">
+    <div class="user-account">
+      <img src="../../../assets/images/user.png" class="rounded-circle user-photo" alt="User Profile Picture" />
+      <div class="dropdown" ngbDropdown>
+        <span>Welcome,</span>
+        <a href="javascript:void(0);" class="dropdown-toggle user-name" ngbDropdownToggle>
+          <strong>{{ user.first_name != "" ? user.first_name : "Not Set" }}
+            {{ user.last_name != "" ? user.last_name : "" }}</strong>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right account" ngbDropdownMenu>
+          <li>
+            <a [routerLink]="['/admin/pages/page-profile2']"><i class="icon-user"></i>My Profile</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/app/app-inbox']">
+              <i class="icon-envelope-open"></i>Messages
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);"><i class="icon-settings"></i>Settings
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a (click)="logOut()"> <i class="icon-power"></i>Logout </a>
+          </li>
+        </ul>
+      </div>
+      <hr />
+    </div>
+    <!-- Tab panes -->
+    <div class="tab-content p-l-0 p-r-0">
+      <div class="tab-pane" id="menu" [ngClass]="{ active: navTab == 'menu' || !navTab }">
+        <nav id="left-sidebar-nav" class="sidebar-nav">
+          <ul id="main-menu" class="metismenu">
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              <a class="" [routerLink]="['/home/dashboard/']">
+                <i class="icon-home"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              <a class="" [routerLink]="['/home/users']">
+                <i class="icon-user"></i>
+                <span>Users</span>
+              </a>
+            </li>
+
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="showSubMenu($event)">
+              <a class="" id="orders">
+                <i class="icon-users"></i>
+                <span>Orders</span>
+              </a>
+              <ul *ngIf="orders | async">
+                <li><a [routerLink]="['/home/orders/buy-orders']"><span>Buy Orders</span></a></li>
+                <li><a [routerLink]="['/home/orders/sell-orders']"><span>Sell Orders</span></a></li>
+              </ul>
+            </li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="showSubMenu($event)">
+              <a class="" id="transactions">
+                <i class="icon-bar-chart"></i>
+                <span>Transactions</span>
+              </a>
+              <ul *ngIf="transactions | async">
+                <li><a [routerLink]="['/home/transactions/buy-transactions']"><span>Buy Transactions</span></a></li>
+                <li><a [routerLink]="['/home/transactions/sell-transactions']"><span>Sell Transactions</span></a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
